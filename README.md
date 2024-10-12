@@ -17,4 +17,4 @@ This project focuses on building an AI system capable of lip-reading to detect p
 - Algorithms: CNN’s, RNN’s 
 
 ## Process FLow Diagram:
-![Process Flow Diagram](/process_flow_diagram.png)
+![Process Flow Diagram](/process_flow_diagram.jpg)
