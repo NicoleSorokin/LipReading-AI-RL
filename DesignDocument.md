@@ -31,7 +31,8 @@
 ## Decisions + Documentation:
 ### Add your decisions and reasoning here:
 - Using [EMOLIPS model]([url](https://github.com/SMIL-SPCRAS/EMOLIPS)) (CNN-LSTM model) to detect emotion from lips using details from the face.
-- Negative emotions (e.g. anger, disgust) can be used to assist in threat identification. 
+- Negative emotions (e.g. anger, disgust) can be used to assist in threat identification.
+- Oct-27: Changing to facial emotion recognition model using deepface.
 
 ## Rough Milestone Timelines:  
 
