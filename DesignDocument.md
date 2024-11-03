@@ -39,8 +39,8 @@ of a CNN, each followed by a spatial max-pooling layer, then features are proces
 - Implemented mouth cropping based on mouth landmarks with reference point stabilization
 - Uses a weighted average of the current and last frame
 - Example (may need to open in a media player, not directly in code editor):
-> [Uncropped Video](machine_learning/lip_reading/preprocessing/dataset/example_speaker.mp4)  
-> [Cropped Video](machine_learning/lip_reading/preprocessing/output/cropped_example_speaker.mp4)
+> [Uncropped Video](machine_learning/lip_reading/preprocessing/dataset/ex_1_uncropped.mp4)  
+> [Cropped Video](machine_learning/lip_reading/preprocessing/output/cropped_ex_1_uncropped.mp4)
 
 ## Rough Milestone Timelines:  
 
