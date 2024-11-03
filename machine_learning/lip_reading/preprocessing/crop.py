@@ -8,7 +8,7 @@ INPUT_PATH = './dataset/'
 CROPPED_PATH = './cropped/'
 OUTPUT_PATH = './output/'
 PREDICTOR_PATH = './predictors/shape_predictor_68_face_landmarks_GTX (1).dat'
-CROPPED_SIZE = (200, 100)
+CROPPED_SIZE = (1920, 1080)
 
 # Dlib face detector and landmark predictor
 face_detector = dlib.get_frontal_face_detector()
@@ -79,8 +79,8 @@ class VideoProcessor:
             else:
                 # Smoothly update the reference point
                 last_center = (
-                    int(last_center[0] * 0.7 + lip_center_x * 0.3),
-                    int(last_center[1] * 0.7 + lip_center_y * 0.3)
+                    int(last_center[0] * 0.2 + lip_center_x * 0.8),
+                    int(last_center[1] * 0.2 + lip_center_y * 0.8)
                 )
 
             # Define cropping area based on the stable reference point
@@ -122,7 +122,7 @@ class VideoProcessor:
             frames = self.frames
         
         height, width, layers = frames[0].shape
-        output_path = os.path.join(OUTPUT_PATH, self.video_name.replace('.mpg', '.mp4'))
+        output_path = os.path.join(OUTPUT_PATH, f"cropped_{self.video_name.replace('.mpg', '.mp4')}")
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
         
         out = cv2.VideoWriter(output_path, fourcc, 30, (width, height))
@@ -144,5 +144,5 @@ if __name__ == "__main__":
         video_processor.load_frames()
         video_processor.detect_landmarks()
         #video_processor.overlay_landmarks()
-        video_processor.crop_mouth(CROPPED_SIZE, 28, 18)
+        video_processor.crop_mouth(CROPPED_SIZE, 70, 70)
         video_processor.save_video('cropped')
