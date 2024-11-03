@@ -30,6 +30,11 @@
 
 ## Decisions + Documentation:
 ### Add your decisions and reasoning here:
+#### Lip Movement to text:
+- We will be closely following the methods of [LipNet](https://arxiv.org/pdf/1611.01599) as it has been proven to work and there is lots of existing documentations on this method
+- This method uses Dlib for detecting facial landmarks and preprocessing the GRID dataset, then inputs a sequence of frames to 3 layers of 
+of a CNN, each followed by a spatial max-pooling layer, then features are processed by two bidrectional GRUs; each time-step of the GRU output is processed by a linear layer and a softmax over the vocabulary. The model is then trained using CTC.
+
 
 ## Rough Milestone Timelines:  
 
