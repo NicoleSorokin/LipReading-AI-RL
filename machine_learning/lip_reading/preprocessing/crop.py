@@ -2,10 +2,10 @@ import shutil
 import dlib
 import cv2
 import os
+import tensorflow as tf
 
 # Constants
 INPUT_PATH = './dataset/'
-CROPPED_PATH = './cropped/'
 OUTPUT_PATH = './output/'
 PREDICTOR_PATH = './predictors/shape_predictor_68_face_landmarks_GTX (1).dat'
 CROPPED_SIZE = (1920, 1080)
@@ -14,10 +14,10 @@ CROPPED_SIZE = (1920, 1080)
 face_detector = dlib.get_frontal_face_detector()
 landmark_predictor = dlib.shape_predictor(PREDICTOR_PATH)
 
-class VideoProcessor:
-    def __init__(self, video_name):
-        self.video_name = video_name
-        self.video_path = os.path.join(INPUT_PATH, video_name)
+class Crop:
+    def __init__(self, video_path):
+        self.video_name = os.path.splitext(os.path.basename(video_path))[0]
+        self.video_path = video_path
         self.frames = []
         self.landmarks = []
         self.cropped = []
@@ -59,8 +59,6 @@ class VideoProcessor:
             raise ValueError("Landmarks not detected. Call detect_landmarks() first.")
 
         cropped_frames = []
-        
-        # Initial reference point (optional: can be dynamically set)
         last_center = None
         
         for i, landmark in enumerate(self.landmarks):
@@ -96,7 +94,6 @@ class VideoProcessor:
             cropped_frames.append(cropped_frame)
 
         self.cropped = cropped_frames
-        print(f"Cropped frames count: {len(self.cropped)}")
 
     #For visualizing landmarks
     def overlay_landmarks(self):
@@ -132,17 +129,6 @@ class VideoProcessor:
         out.release()
         print(f"Video '{self.video_name}' created successfully at {output_path}")
 
-if __name__ == "__main__":
-    video_files = os.listdir(INPUT_PATH)
+    def get_frames(self):
+        return tf.convert_to_tensor(self.cropped, dtype=tf.float32)
 
-    if os.path.exists(OUTPUT_PATH):
-        shutil.rmtree(OUTPUT_PATH)
-    os.makedirs(OUTPUT_PATH)
-    
-    for video_name in video_files:
-        video_processor = VideoProcessor(video_name)
-        video_processor.load_frames()
-        video_processor.detect_landmarks()
-        #video_processor.overlay_landmarks()
-        video_processor.crop_mouth(CROPPED_SIZE, 70, 70)
-        video_processor.save_video('cropped')
