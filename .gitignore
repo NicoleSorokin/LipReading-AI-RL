@@ -1,1 +1,4 @@
 dlib
+machine_learning/lip_reading/preprocessing/data/videos
+machine_learning/lip_reading/preprocessing/data/aligns
+machine_learning/lip_reading/preprocessing/__pycache__
