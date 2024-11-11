@@ -10,31 +10,30 @@
 
 ## Tech stack: 
 - Programming Language: Python 
-- Datasets: numpy (data manipulations), GRID corpus, multi-view lip reading sentences or lip reading in the wild (datasets for training) 
-- Computer Vision: OpenCV (capturing video), Dlib (detecting lips), FFmpeg (for processing video frames), maybe media pipe also for detecting face 
-- Machine Learning Framework: Tensorflow (or PyTorch) 
-- Reinforcement Learning: Gymnasium (environment), TF-Agents (reinforcement learning algorithms) (StableBaseline 3 if using PyTorch) 
+- Datasets: numpy (data manipulations), subset of GRID
+- Computer Vision: OpenCV (capturing video), Dlib (detecting lips), maybe media pipe also for detecting face, HandDetector
+- Machine Learning Framework: Tensorflow
+- Reinforcement Learning: Gymnasium (environment) 
 - Frontend: React next.js 
 - Backend: fastapi 
-- Algorithms: CNN’s, RNN’s 
+- Algorithms: Q-Learning
 
 ## The 2 Main Stages:  
 
 ### First:  
-- Employ conventional computer vision techniques alongside neural networks to identify and classify a person's physical actions.  
-- Utilize distinct models to analyze lip movements and classify spoken words, leveraging existing frameworks like Mediapipe or Dlib.  
+- Employ conventional computer vision techniques classify a person's physical actions (both face and body language) and convert them into numerical values.
+- Utilize distinct models to analyze lip movements to text and convert to a numerical value. 
 
 ### Second:  
-- Train a reinforcement learning model to recognize sequences of actions and lip movements that indicate malicious behavior.  
-- Example: identify when someone makes a threat or exhibits violent movements, categorizing them as malicious.  
+- Based on the two inputs from the first stage, train a reinforcement learning model to recognize sequences of actions and lip movements that indicate malicious behavior (0 -> non-malicious, 1 -> malicious, and scale of 0-1 of 0 being non-threatening key-words and 1 being threatening key-words).
+- Based on the agent, the state of the environment can change. De-escalate if correctly identified, escalate if incorrectly identified.
 
 ## Decisions + Documentation:
-### Add your decisions and reasoning here:
-- Using [EMOLIPS model]([url](https://github.com/SMIL-SPCRAS/EMOLIPS)) (CNN-LSTM model) to detect emotion from lips using details from the face.
+#### Body Language Detection:
+- Using EMOLIPS model (CNN-LSTM model) to detect emotion from lips using details from the face.
 - Negative emotions (e.g. anger, disgust) can be used to assist in threat identification.
 - Oct-27: Changing to facial emotion recognition model using deepface.
-- Integrating body language into threatening vs non-threatening classification [using mediapipe]([url](https://www.youtube.com/watch?v=We1uB79Ci-w)) -- train ML model on coordinates of landmarks in frames with associated labels.  
-
+- Integrating body language into threatening vs non-threatening classification using mediapipe -- train ML model on coordinates of landmarks in frames with associated labels.
 #### Lip Movement to text:
 - We will be closely following the methods of [LipNet](https://arxiv.org/pdf/1611.01599) as it has been proven to work and there is lots of existing documentations on this method
 - This method uses Dlib for detecting facial landmarks and preprocessing the GRID dataset, then inputs a sequence of frames to 3 layers of 
@@ -47,10 +46,9 @@ of a CNN, each followed by a spatial max-pooling layer, then features are proces
 > [Uncropped Video](machine_learning/lip_reading/preprocessing/example/ex_1_uncropped.mp4)  
 > [Cropped Video](machine_learning/lip_reading/preprocessing/example/ex_1_cropped.mp4)
 
-
 ## Rough Milestone Timelines:  
 
-### Week 1:  
+### Weeks 1-2:  
 - Project kickoff and setup  
 - Assign tasks  
 - Define goals  
@@ -58,42 +56,32 @@ of a CNN, each followed by a spatial max-pooling layer, then features are proces
 - Create basic frontend and backend  
 - Set up OpenCV  
 
-### Weeks 2-3:  
-- Start implementing CNN  
-- Set up lip detection  
-- Get the API endpoints working between frontend and backend  
+### Weeks 3-4:  
+- Split into two stages: lip reading and reinforcement learning
+- Research different models/methods for both stages
+- Start implementation
 
-### Weeks 4-5:  
-- Data preprocessing should be done by now to be ready for training  
-- Continue working on CNN and RNN  
-- Start implementing RNN  
-- Work on improving lip detection  
+### Weeks 5-6:  
+- Finish body language part of stage 1
+- Set up RL environment
+- Finish preprocessing for lip to text part of stage 1
+- Continue implementation of training for lip to text part of stage 1
 
-### Weeks 6-7:  
-- Set up Gym environment and begin integrating TF-Agents for RL  
-- Refine CNN, test on datasets  
-- Start training using RL  
-- Integrate frontend to upload video and send to backend to start testing on it  
+### Weeks 7-8:  
+- Finish training for lip to text part of stage 1
+- Finish RL stage 2
+- Have a demo video done
 
-### Weeks 8-9:  
-- Finish up the CNN and RNN models and integrate with RL  
-- Integrate backend logic for handling RL inference and make it work with frontend UI  
-- Test the RL on video uploads, adjust parameters  
-- Implement end-to-end pipeline: video upload → processing → lip reading → display results  
-- Address any performance issues/bugs  
-
-### Week 10:  
-- MVP should be done by now  
-- Video uploads  
-- Keep fine-tuning the RL training (and try to finish integrating with CNN and RNN)  
-- Lip reading detection  
-- Refine frontend for smooth interaction  
+### Weeks 8-10:  
+- Connect stage 1 and 2 together
+- Continue training the reinforcement learning model
 
 ## AFTER WINTER BREAK:  
 
-### Weeks 11-12:  
+### Weeks 11-13:  
 - Keep training and testing  
 - Train the RL agents more, fine-tune the reward functions and policies  
+- Make the frontend and backend
 
 ### Weeks 13-14:  
 - Conduct tests and identify edge cases  
