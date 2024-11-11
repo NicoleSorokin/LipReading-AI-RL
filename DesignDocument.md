@@ -30,6 +30,11 @@
 
 ## Decisions + Documentation:
 ### Add your decisions and reasoning here:
+- Using [EMOLIPS model]([url](https://github.com/SMIL-SPCRAS/EMOLIPS)) (CNN-LSTM model) to detect emotion from lips using details from the face.
+- Negative emotions (e.g. anger, disgust) can be used to assist in threat identification.
+- Oct-27: Changing to facial emotion recognition model using deepface.
+- Integrating body language into threatening vs non-threatening classification [using mediapipe]([url](https://www.youtube.com/watch?v=We1uB79Ci-w)) -- train ML model on coordinates of landmarks in frames with associated labels.  
+
 #### Lip Movement to text:
 - We will be closely following the methods of [LipNet](https://arxiv.org/pdf/1611.01599) as it has been proven to work and there is lots of existing documentations on this method
 - This method uses Dlib for detecting facial landmarks and preprocessing the GRID dataset, then inputs a sequence of frames to 3 layers of 
@@ -41,6 +46,7 @@ of a CNN, each followed by a spatial max-pooling layer, then features are proces
 - Example (may need to open in a media player, not directly in code editor):
 > [Uncropped Video](machine_learning/lip_reading/preprocessing/example/ex_1_uncropped.mp4)  
 > [Cropped Video](machine_learning/lip_reading/preprocessing/example/ex_1_cropped.mp4)
+
 
 ## Rough Milestone Timelines:  
 
