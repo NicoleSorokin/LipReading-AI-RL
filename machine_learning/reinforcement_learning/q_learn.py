@@ -1,7 +1,7 @@
 import random
 import numpy as np
 
-from rl import MaliciousClassificationEnv
+from machine_learning.reinforcement_learning.rl import MaliciousClassificationEnv
 
 # define params
 LEARNING_RATE = 0.1
