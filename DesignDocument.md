@@ -10,7 +10,7 @@
 
 ## Tech stack: 
 - Programming Language: Python 
-- Datasets: numpy (data manipulations), subset of GRID
+- Datasets: numpy (data manipulations), subset of GRID, Shape Predictor 68
 - Computer Vision: OpenCV (capturing video), Dlib (detecting lips), maybe media pipe also for detecting face, HandDetector
 - Machine Learning Framework: Tensorflow
 - Reinforcement Learning: Gymnasium (environment) 
