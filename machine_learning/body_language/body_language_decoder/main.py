@@ -15,14 +15,12 @@ if __name__ == "__main__":
 
     emotion_process.start()
     agent_process.start()
-
-    while True:
-        try:
-            emotion_process.join()
-            agent_process.join()
-        except KeyboardInterrupt:
-            print("Terminating processes...")
-            cv2.destroyAllWindows()
-            emotion_process.terminate()
-            agent_process.terminate()
-            break
+    
+    try:
+        emotion_process.join()
+        agent_process.join()
+    except KeyboardInterrupt:
+        print("Terminating processes...")
+        cv2.destroyAllWindows()
+        emotion_process.terminate()
+        agent_process.terminate()

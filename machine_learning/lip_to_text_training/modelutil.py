@@ -115,12 +115,14 @@ def mappable_function(path:str) ->List[str]:
     result = tf.py_function(load_data, [path], (tf.float32, tf.int64))
     return result
 
+
 # GET THE DATA
 data = tf.data.Dataset.list_files('./data/s1/*.mpg')
 data = data.shuffle(500, reshuffle_each_iteration=False)
 data = data.map(mappable_function)
 data = data.padded_batch(2, padded_shapes=([75,None,None,None],[40]))
 data = data.prefetch(tf.data.AUTOTUNE)
+
 # Added for split 
 train = data.take(450)
 test = data.skip(450)

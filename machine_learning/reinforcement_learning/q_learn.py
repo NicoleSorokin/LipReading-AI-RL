@@ -1,7 +1,7 @@
 import random
 import numpy as np
 
-from machine_learning.reinforcement_learning.rl import MaliciousClassificationEnv
+from rl import MaliciousClassificationEnv
 
 # define params
 LEARNING_RATE = 0.1
@@ -55,4 +55,8 @@ def classify_behavior(emotion, malicious_score):
     return "Malicious" if action == 1 else "Non-Malicious"
 
 # Test the agent with an example input
-print("Classify behavior:", classify_behavior(-1, 1))  # Negative emotion, malicious behavior
+
+
+print("Classify behavior:", classify_behavior(1, 1))  # Negative emotion, malicious behavior
+print(env.emotion_values)
+print(env.maliciousness_values)
