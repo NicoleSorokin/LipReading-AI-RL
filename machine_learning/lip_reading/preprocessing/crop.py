@@ -7,8 +7,8 @@ import tensorflow as tf
 # Constants
 INPUT_PATH = './dataset/'
 OUTPUT_PATH = './output/'
-PREDICTOR_PATH = './predictors/shape_predictor_68_face_landmarks_GTX (1).dat'
-CROPPED_SIZE = (1920, 1080)
+PREDICTOR_PATH = './preprocessing/predictors/shape_predictor_68_face_landmarks_GTX.dat'
+CROPPED_SIZE = (100, 50)
 
 # Dlib face detector and landmark predictor
 face_detector = dlib.get_frontal_face_detector()
@@ -90,6 +90,7 @@ class Crop:
 
             cropped_frame = self.frames[i][top:bottom, left:right]
             cropped_frame = cv2.resize(cropped_frame, size, interpolation=cv2.INTER_CUBIC)
+            cropped_frame = cv2.cvtColor(cropped_frame, cv2.COLOR_BGR2GRAY)
 
             cropped_frames.append(cropped_frame)
 
