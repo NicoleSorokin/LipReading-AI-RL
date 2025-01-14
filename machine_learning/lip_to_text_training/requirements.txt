@@ -1,7 +1,0 @@
-Need to install:
-Tensorflow
-typing
-opencv-python
-
-For a Mac:
-Use Python3.9
