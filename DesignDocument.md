@@ -1,12 +1,11 @@
-
 # Design Document
 
 ## Idea:  
 **Lip Reading AI using Reinforcement Learning**  
 
 ## Use Cases
-- Security applications: Detecting threats or violent language when audio is corrupted or unavailable.
-- Violence mitigation: This project can potentially be used for public safety, such as in campus surveillance.
+- Security applications: Detecting threats or violent language when audio is corrupted or unavailable during meetings.
+- Violence mitigation: This project can potentially be used for public safety, such as in campus surveillance or implemented in glasses with cameras of something of that sort to aid people with disabilities such as blindness to be notified of any potential threats they may not be able to see.
 
 ## Tech stack: 
 - Programming Language: Python 
@@ -20,12 +19,8 @@
 
 ## The 2 Main Stages:  
 
-### First:  
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 96a9c52a175b1c33c9054042d500ad6aa426b33b
-- Employ conventional computer vision techniques classify a person's physical actions (both face and body language) and convert them into numerical values.
+### First:
+- Employ conventional computer vision techniques classify a person's physical actions (both face and body language) and convert to a numerical value.
 - Utilize distinct models to analyze lip movements to text and convert to a numerical value. 
 
 ### Second:  
@@ -34,21 +29,18 @@
 
 ## Decisions + Documentation:
 #### Body Language Detection:
-<<<<<<< HEAD
 - Using [EMOLIPS model]([url](https://github.com/SMIL-SPCRAS/EMOLIPS)) (CNN-LSTM model) to detect emotion from lips using details from the face.
 - Negative emotions (e.g. anger, disgust) can be used to assist in threat identification.
 - Oct-27: Changing to facial emotion recognition model using deepface.
 - Integrating body language into threatening vs non-threatening classification [using mediapipe]([url](https://www.youtube.com/watch?v=We1uB79Ci-w)) -- train ML model on coordinates of landmarks in frames with associated labels.  
-=======
-- Using EMOLIPS model (CNN-LSTM model) to detect emotion from lips using details from the face.
-- Negative emotions (e.g. anger, disgust) can be used to assist in threat identification.
-- Oct-27: Changing to facial emotion recognition model using deepface.
-- Integrating body language into threatening vs non-threatening classification using mediapipe -- train ML model on coordinates of landmarks in frames with associated labels.
->>>>>>> 96a9c52a175b1c33c9054042d500ad6aa426b33b
+- Jan 13: Made the decision to use one body language model (mediapipe) due to multiprocessing conflicts of running two models at once (which was the original goal to get an average of both models).
+
 #### Lip Movement to text:
 - We will be closely following the methods of [LipNet](https://arxiv.org/pdf/1611.01599) as it has been proven to work and there is lots of existing documentations on this method
 - This method uses Dlib for detecting facial landmarks and preprocessing the GRID dataset, then inputs a sequence of frames to 3 layers of 
 of a CNN, each followed by a spatial max-pooling layer, then features are processed by two bidrectional GRUs; each time-step of the GRU output is processed by a linear layer and a softmax over the vocabulary. The model is then trained using CTC.
+- Jan 13: Switching over to another model due to the previous one lacking the ability to process a live video stream. From here on out is to base our model off of something existing to transcribe lip movement to text (maybe whisper?) then use our own model to sleect words and compare against a dictionary or something to determine level of violence.
+
 ##### Preprocessing:
 - Loaded video frames and detected faces and facial landmarks using dlib pretrained models
 - Implemented mouth cropping based on mouth landmarks with reference point stabilization
@@ -58,10 +50,6 @@ of a CNN, each followed by a spatial max-pooling layer, then features are proces
 > [Cropped Video](machine_learning/lip_reading/preprocessing/example/ex_1_cropped.mp4)
 
 ## Rough Milestone Timelines:  
-<<<<<<< HEAD
-=======
-
->>>>>>> 96a9c52a175b1c33c9054042d500ad6aa426b33b
 ### Weeks 1-2:  
 - Project kickoff and setup  
 - Assign tasks  
@@ -93,17 +81,18 @@ of a CNN, each followed by a spatial max-pooling layer, then features are proces
 ## AFTER WINTER BREAK:  
 
 ### Weeks 11-13:  
-- Keep training and testing  
-- Train the RL agents more, fine-tune the reward functions and policies  
-- Make the frontend and backend
+- Building the frontend and backend and connecting with machine learning scripts
+- Finalized body language model
+- Finalize lip to text model
+- Working on RL
 
 ### Weeks 13-14:  
-- Conduct tests and identify edge cases  
-- Optimize where possible  
-- Continue testing and optimizing  
+- Working on connecting everything together
 
 ### Week 15:  
 - Final touches  
+- Maybe try to make it work with a webcam
 
 ## Process FLow Diagram:
+# will be updated soon!
 ![Process Flow Diagram](/process_flow_dgm.jpg)
