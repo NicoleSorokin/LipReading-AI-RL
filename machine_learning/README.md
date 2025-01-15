@@ -60,9 +60,17 @@ else:
 ```
 The reward calculation is based on the current action and the threat probability. (Add more info on how the reward is calculated.)
 
-Benefits of using reinforcement learning:
+### Benefits of using reinforcement learning:
 - Learning from trial and error it improves the accuracy of the model.
 - It allows for adaptation to new situations.
 - The reward system provides immediate feedback about the appropriateness of actions.
 - Continuously improve its decision-making based on experience.
 - and many more to be added soon...
+
+
+Next steps:
+1. Evaluate the performance of the reinforcement learning model and create some graphs to visualize the learning process.
+2. Create a decision making tree that shows all th possible actions and their outcomes and how the rl model learns from this/chooses its actions.
+3. Update research doc.
+4. Update design doc.
+5. Update process flow diagram.
